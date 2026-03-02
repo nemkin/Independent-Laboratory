@@ -1,2 +1,5 @@
 # Ignore LaTeX build artifacts
 /LaTeX/out/
+
+# Input files
+KEP_Survey_Experimentation_Instances/
