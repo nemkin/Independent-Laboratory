@@ -10,12 +10,12 @@
 \usepackage{subcaption}
 
 % \geometry{a4paper, margin=35mm, headheight=15mm}
-\geometry{paperwidth=245mm, paperheight=297mm, left=35mm, right=70mm, top=35mm, bottom=35mm, headheight=15mm, marginparwidth=60mm}
-\setlength{\marginparwidth}{60mm}
+\geometry{paperwidth=265mm, paperheight=297mm, left=35mm, right=90mm, top=35mm, bottom=35mm, headheight=15mm, marginparwidth=80mm}
+\setlength{\marginparwidth}{80mm}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{soul}
 \definecolor{vikinote}{RGB}{185,175,240}
-\newcommand{\viki}[2][]{\ifx&#1&\todo[color=vikinote!50]{\textbf{Viki:} #2}\else\hl{#1}\todo[color=vikinote!50]{\textbf{Viki:} #2}\fi}
+\newcommand{\viki}[2][]{\ifx&#1&\todo[color=vikinote!50,bordercolor=violet!70,linecolor=violet!80]{\textbf{Viki:} #2}\else\hl{#1}\todo[color=vikinote!50,bordercolor=violet!70,linecolor=violet!80]{\textbf{Viki:} #2}\fi}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -78,7 +78,9 @@ Számítástudományi és Információelméleti Tanszék}
 %% --------------------------------------------------------
 
 \section{Bevezetés}
-A laboratórium témája a vesetranszplantációs cserekörök meghatározására próbál megoldást adni. Ötletének forrása a páneurópai vesecsere program.
+A laboratórium témája a vesetranszplantációs cserekörök meghatározására \viki[próbál]{A téma nem próbál megoldást adni, ez nyelvtanilag hibás. A dolgozat témája vesetranszplantációs cserekörök keresése és te próbálsz megoldást adni. :)} megoldást adni. Ötletének forrása a páneurópai vesecsere program.
+
+\viki{Itt a bevezetésben kellene sokkal többet mesélni arról, hogy mi egyáltalán ez a program és hogyan működik, először még a szakkifejezések használata nélkül, motiválni az olvasót.}
 
 \subsection{Szakkifejezések}
 \begin{itemize}
@@ -89,17 +91,18 @@ A laboratórium témája a vesetranszplantációs cserekörök meghatározásár
 	\item Non-directed donors (NDD) / altruistic donors - altruista donor vagy önzetlen donor
 	
 	Olyan élő donor, aki nem egy konkrét személynek (például rokonnak vagy barátnak), hanem az országos/nemzetközi várólistán szereplő bármely rászoruló számára ajánlja fel a szervét.
+\viki{(Javaslat) Ha ennél sokkal több szakkifejezés nem lesz, akkor akár bele is fűzheted a bevezetőbe ezt a két kifejezést. Általában ha egy nagyon rövid fejezeted van, azt inkább érdemes összevonni más fejezetekkel. }
 \end{itemize}
 
 \subsection{Modellező gráf}
-Két ember egy pont, ami egy donort és egy recipienst jelent. A súlyozott, irányított élek a köztük lévő potenciális csere erőssége.
+Két ember egy \viki[pont]{Általában inkább a csúcs kifejezést szoktuk használni, a pontot szerintem akkor, ha valami geometriai kontextus is van.}, ami egy donort és egy recipienst jelent. \viki[A súlyozott, irányított élek a köztük lévő potenciális csere erőssége.]{Ebből nem derül ki, hogy az él melyik irányba mutat illetve az "erőssége" kifejezés ködös. Itt gondolom ennek sok definíciója létezik, de egy egyszerű példa még segítene.}
 
 \begin{tabular}{c c}
 \includegraphics[width=62mm]{../docs/RDP-3pair-cycle} & \includegraphics[width=62mm]{../docs/RDP-3pair-chain} \\
 \end{tabular}
 
 \subsection{Kezdeti kérdések}
-Ahhoz, hogy a projekt használhatósága és a valóságot minél jobban modellező szemlélete megmaradjon az alábbi kérdéseket, majd válaszokat gyűjtöttem össze. Ezek segítenek a modell kialakítása során megtalálni a szükséges paramétereket és értékkészletüket.
+Ahhoz, hogy a projekt használhatósága és a valóságot minél jobban modellező szemlélete megmaradjon \viki[az alábbi kérdéseket, majd válaszokat gyűjtöttem össze]{Egyébként jól értelmezem, hogy ez a Questionary amit kaptunk, az nem publikus? Ha igen, akkor utána fogok kérdezni ennek a hivatkozása hogy történik.}. Ezek segítenek a modell kialakítása során megtalálni a szükséges paramétereket és értékkészletüket.
 
 \emph{Összefoglalás}
 
@@ -109,7 +112,7 @@ A kezdeti kérdések alapján körvonalazódott modellezéshez a \href{https://r
 
 \subsection{Adathalmaz jellemzése}
 
-Tartalmaz egyes szintetikusan generált eseteket és felhasználási módja közé tartozik tesztelni és összehasonlítani különféle vesecsere program optimalizáló technikákat.
+\viki[Tartalmaz egyes szintetikusan generált eseteket]{Ez úgy hangzik, mintha mást is tartalmazna, pedig nem.} és felhasználási módja közé tartozik tesztelni és összehasonlítani különféle vesecsere program optimalizáló technikákat.
 
 180 darab különböző vesecsere probléma esetet tartalmaz JSON formátumban. A JSON fájlok nevei egyben megadják az adott eset paramétereit is.
 A nevek eleje egységesen:
