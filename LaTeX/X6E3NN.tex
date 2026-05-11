@@ -10,13 +10,13 @@
 \usepackage{subcaption}
 
 % \geometry{a4paper, margin=35mm, headheight=15mm}
-\geometry{paperwidth=265mm, paperheight=297mm, left=35mm, right=90mm, top=35mm, bottom=35mm, headheight=15mm, marginparwidth=80mm}
-\setlength{\marginparwidth}{80mm}
+\geometry{paperwidth=305mm, paperheight=297mm, left=35mm, right=130mm, top=35mm, bottom=35mm, headheight=15mm, marginparwidth=120mm}
+\setlength{\marginparwidth}{120mm}
 \usepackage{marginfix}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{soul}
 \definecolor{vikinote}{RGB}{185,175,240}
-\newcommand{\viki}[2][]{\ifx&#1&\todo[color=vikinote!50,bordercolor=violet!70,linecolor=violet!80]{\textbf{Viki:} #2}\else\hl{#1}\todo[color=vikinote!50,bordercolor=violet!70,linecolor=violet!80]{\textbf{Viki:} #2}\fi}
+\newcommand{\viki}[2][]{\ifx&#1&\par\noindent{\color{violet!70}\Large*}\todo[color=vikinote!50,bordercolor=violet!70,linecolor=violet!80,fancyline]{\textbf{Viki:} #2}\par\else\todo[color=vikinote!50,bordercolor=violet!70,linecolor=violet!80,fancyline]{\textbf{Viki:} #2}\hl{#1}\fi}
 
 \pagestyle{fancy}
 \fancyhf{}
@@ -141,7 +141,7 @@ A relációs jelek közé írt értékek jelentése:
 
 \subsection{Jelenlegi adatmezők}
 
-\viki{Én ezzel a fejezettel azt csinálnám, hogy először csak elmesélném, hogy mit tartalmaz a JSON fájl, anélkül, hogy a JSON adatmezők neveit beletűzdelném. Nagyon döcögős ettől ez a fejezet és ha valaki a mezők nevére kíváncsi, az nem is nagyon tudja kimazsolázni azt a zárójelekből. Ezután vagy beszúrnék egy rövid JSON példát, amiben utána elmondanám, hogy mi mit jelent, vagy valami szép JSON struktúra leírót tennék a végére.}
+\viki{Nagyon zavaróak itt az egész fejezetben a zárójelbe tett angol JSON mező nevek. Megakasztják / döcögőssé teszik az olvasás flowját. Ha valaki pedig valamelyik mező jelentését keresi, akkor ebben az ömlesztett szövegben úgyse fogja megtalálni. Én különválasztanám a mesét, hogy mit tartalmaz az adathalmaz és a JSON adatmezők nevének a jelentését. Ez utóbbit valamilyen szépen formázott módon, pl. táblázattal, vagy egy kis példán keresztül szemléltetve raknám a fejezet végére egy technikaibb szekcióba. \\ Egy profi író mindig figyel az olvasóközönségére is: a te olvasóközönséged két jól elkülönülő táborból áll, VIK-es hallgatókból és SZIT-es matematikusokból. Az utóbbiakat nem fogja érdekelni a JSON definíciója, ha ezt egy skippelhető alfejezetbe szeded ki, az növelni fogja a dolgozatod minőségét és olvashatóságát az ő szemükben.}
 
 Minden JSON-fájl két fő részből áll. A donor-oldal (data) tartalmazza a dage mezőt (donor kora), a bloodtype mezőt (vércsoport: A, B, O vagy AB), az altruistic jelzőt (altruista donor-e), a sources mezőt (a hozzákapcsolt recipiens azonosítója, altruistáknál hiányzik), valamint a matches tömböt, amely az éleket írja le: minden él egy recipiens azonosítóból és egy score értékből áll. Ez utóbbi egy 0--100 közötti, előre aggregált kompatibilitási pontszám, \viki[valószínűleg UKLKSS-alapú HLA-mismatch érték]{Az olvasó ezt nem fogja érteni, el kellene magyarázni mit jelent.}.
 
@@ -151,29 +151,33 @@ A jelenlegi solver kizárólag a gráfstruktúrát és az élsúlyokat (score) h
 
 \subsection{Hiányzó mezők és lehetséges kiegészítések}
 
-A recipiens kora (rage) hiányzik az adatokból, holott a donor--recipiens korkülönbség fontos minőségi kritérium, és a donor kora (dage) már elérhető. Szintetikus generálással pótolható UK KEP eloszlás alapján.
+A recipiens kora (rage) hiányzik az adatokból, holott a donor--recipiens korkülönbség fontos minőségi kritérium, és a donor kora (dage) már elérhető. Szintetikus generálással pótolható \viki[UK KEP]{Az olvasó nem tudja, hogy ez mi.} eloszlás alapján.
 
-A várakozási idő (waiting\_time, napokban) a README szerint szerepelnie kellene, de a tényleges JSON-fájlokból hiányzik. Ez a Light-Equity optimalizálási policy egyik alapja lenne. UK historikus eloszlásból generálható.
+A várakozási \viki[idő]{typo: időnek} (waiting\_time, napokban) a README szerint szerepelnie kellene, de a tényleges JSON-fájlokból hiányzik. Ez a \viki[Light-Equity optimalizálási policy]{Az olvasó nem tudja, hogy ez mi.} egyik alapja lenne. \viki[UK historikus eloszlásból]{Ez ugyanaz mint a UK KEP eloszlás? Konzisztensen ugyanolyan néven hivatkozz rá.} generálható.
 
-A highly\_sensitised logikai jelző szintén ígérve van a README-ben, de nincs jelen. Triviálisan levezethető: cPRA értéke meghaladja-e a 0.85 küszöböt.
+A \viki[highly\_sensitised logikai jelző]{Az olvasó nem tudja, hogy ez mi (itt mondjuk tippelni tud, de le kell írni precízen).} szintén ígérve van a README-ben, de nincs jelen. \viki[Triviálisan]{Ezt a szót érdemes kerülni, sokan (köztük én is) lekezelőnek tartják. Bőven elég azt mondani, hogy levezethető a következőképpen, a levezetés nehézségét nem érdemes minősíteni, mert az szubjektív.} levezethető: cPRA értéke meghaladja-e a 0.85 küszöböt.
 
 Az ország-azonosító (country) nélkülözhetetlen a páneurópai Egyéni Racionalitás elemzéséhez és az együttműködési politikák kiértékeléséhez. Szintetikusan hozzárendelhető, például 5 ország arányos elosztásával.
 
 A távolság (distance\_km) él-szintű mező jelenleg nincs jelen, holott az EURO-KEP főváros-távolságot tervez közelítőként használni. Számítható, ha az ország-azonosító rendelkezésre áll.
 
-HLA allél adatok (A, B, C, DR, DQ lókuszok) nem szerepelnek az adathalmazban, csak az aggregált score érték. Emiatt az Eurotransplant és a HLA Working Group pontszámok nem reprodukálhatók; a score valószínűleg UKLKSS-alapú.
+\viki[HLA allél adatok (A, B, C, DR, DQ lókuszok)]{Az olvasó nem tudja, hogy ez mit jelent.} nem szerepelnek az adathalmazban, csak az aggregált score érték. Emiatt az \viki[Eurotransplant és a HLA Working Group pontszámok]{Ezekről sem tudjuk mit jelentenek.} nem reprodukálhatók; a score valószínűleg UKLKSS-alapú.
 
-A lemondási valószínűség (cancellation\_prob) él-szintű értékként nem szerepel. Lemondási politikák modellezéséhez szükséges lenne, és a cPRA értékéből élenkénti függvénnyel közelíthető.
+A lemondási valószínűség (cancellation\_prob) él-szintű értékként nem szerepel. \viki[Lemondási politikák]{Ez az angol cancellation policy tükörfordítása? Ki kéne fejteni, hogy mit takar (ki hozza meg a döntést, milyen döntések lehetségesek).} modellezéséhez szükséges lenne, és a cPRA értékéből \viki[élenkénti függvénnyel]{Ez mit jelent? A kör éleinek a cPRA adataiból képzett fv?} közelíthető.
 
-A kompatibilis pár jelző (is\_compatible\_pair) nincs külön tárolva. A kompatibilis pár-politika (KEP-be lépési döntés minőségi feltétellel) szempontjából szükséges; a hasBloodCompatibleDonor mezőből részben következtethető.
+A kompatibilis pár jelző (is\_compatible\_pair) nincs külön tárolva. A kompatibilis pár-politika \viki[(KEP-be lépési döntés minőségi feltétellel)]{Erről kéne többet írni, hogy mit jelent.} szempontjából szükséges; a hasBloodCompatibleDonor mezőből részben következtethető.
 
 Az LKDPI összetevői (magasság, súly, vérnyomás, eGFR, dohányzás) nem elérhetők, csak a donor kora (dage) áll rendelkezésre. A teljes LKDPI-index így nem számítható.
 
 A centrum-azonosító (center\_id) sem szerepel az adatokban, holott a különböző transzplantációs centrumok eltérő kapacitáskorlátokkal rendelkezhetnek. Szintetikusan hozzárendelhető.
 
+\viki{Általános megjegyzés a fenti fejezethez: ezt maximum egy, a témában kifejezetten jártas szakértő fogja megérteni, tele van szakzsargonnal és a zárójeles magyarázatok sem segítenek sokat, esetleg mégtöbb szakzsargont tartalmaznak. Gondolj pl. a kollégiumi szobatársadra és írj úgy, hogy ő is megértse.}
+
 \subsection{Amit a solver már most felhasználhatna}
 
-A cPRA értéke alapján az erősen érzékenyített recipiensek (cPRA nagyobb mint 0.85) preferálhatók lennének az objektívfüggvényben, például egy bónusztaggal súlyozva az élsúlyt.
+\viki{Ezt a fejezetet nem teljesen értem, amiket itt írsz az előző fejezetben is szerepeltek. Az előző fejezetben lévő és itt nem megemlített dolgokat nem tudná felhasználni a solver?}
+
+A cPRA értéke alapján az erősen érzékenyített recipiensek (cPRA nagyobb mint 0.85) preferálhatók lennének az \viki[objektívfüggvényben]{Magyarul célfüggvény.}, például egy \viki[bónusztaggal]{Ez a bónusz szó furcsa. Szorzóval? Illetve a szorzatnak tényezői vannak, az összegnek vannak tagjai.} súlyozva az élsúlyt.
 
 Ha a recipiens kora (rage) is megvolna, a donor--recipiens korkülönbség beépíthető lenne élsúlyként.
 
