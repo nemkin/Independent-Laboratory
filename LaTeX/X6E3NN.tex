@@ -4,11 +4,18 @@
 \usepackage[magyar]{babel}
 \usepackage{graphicx}
 \usepackage{geometry}
-\geometry{a4paper, margin=35mm, headheight=15mm}
 \usepackage{fancyhdr}
 \usepackage[hidelinks]{hyperref}
 \usepackage[numbers]{natbib}
 \usepackage{subcaption}
+
+% \geometry{a4paper, margin=35mm, headheight=15mm}
+\geometry{paperwidth=245mm, paperheight=297mm, left=35mm, right=70mm, top=35mm, bottom=35mm, headheight=15mm, marginparwidth=60mm}
+\setlength{\marginparwidth}{60mm}
+\usepackage[colorinlistoftodos]{todonotes}
+\usepackage{soul}
+\definecolor{vikinote}{RGB}{185,175,240}
+\newcommand{\viki}[2][]{\ifx&#1&\todo[color=vikinote!50]{\textbf{Viki:} #2}\else\hl{#1}\todo[color=vikinote!50]{\textbf{Viki:} #2}\fi}
 
 \pagestyle{fancy}
 \fancyhf{}
