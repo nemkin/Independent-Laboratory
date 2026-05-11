@@ -12,6 +12,7 @@
 % \geometry{a4paper, margin=35mm, headheight=15mm}
 \geometry{paperwidth=265mm, paperheight=297mm, left=35mm, right=90mm, top=35mm, bottom=35mm, headheight=15mm, marginparwidth=80mm}
 \setlength{\marginparwidth}{80mm}
+\usepackage{marginfix}
 \usepackage[colorinlistoftodos]{todonotes}
 \usepackage{soul}
 \definecolor{vikinote}{RGB}{185,175,240}
@@ -109,6 +110,8 @@ Ahhoz, hogy a projekt használhatósága és a valóságot minél jobban modelle
 \section{Felhasznált adathalmaz}
 
 A kezdeti kérdések alapján körvonalazódott modellezéshez a \href{https://researchdata.gla.ac.uk/1878/}{University of Glasgow vesecsere programok optimalizálásához szintetikusan előállított adathalmazát} használom fel, valamint bővítem ki.
+\viki{Ezen most nem látszik a dokumentumban, hogy egy klikkelhető link, illetve ha valaki kinyomtatja (idősebb korosztály szokott ilyet), akkor elveszik az infó.}
+\viki{A University of Glasgow-nak szerintem Glasgow-i Egyetem a magyar neve (https://hu.wikipedia.org/wiki/Glasgow-i\_Egyetem).}
 
 \subsection{Adathalmaz jellemzése}
 
@@ -134,11 +137,15 @@ A relációs jelek közé írt értékek jelentése:
 	Értékkészlet: 0-9
 \end{itemize}
 
+\viki{Erről lehetne bővebben írni. Az adathalmazhoz járt egy README.txt, abban is van még több infó. Meg majd ide jöhet egy gráf kép, amiket generáltál. :)}
+
 \subsection{Jelenlegi adatmezők}
 
-Minden JSON-fájl két fő részből áll. A donor-oldal (data) tartalmazza a dage mezőt (donor kora), a bloodtype mezőt (vércsoport: A, B, O vagy AB), az altruistic jelzőt (altruista donor-e), a sources mezőt (a hozzákapcsolt recipiens azonosítója, altruistáknál hiányzik), valamint a matches tömböt, amely az éleket írja le: minden él egy recipiens azonosítóból és egy score értékből áll. Ez utóbbi egy 0--100 közötti, előre aggregált kompatibilitási pontszám, valószínűleg UKLKSS-alapú HLA-mismatch érték.
+\viki{Én ezzel a fejezettel azt csinálnám, hogy először csak elmesélném, hogy mit tartalmaz a JSON fájl, anélkül, hogy a JSON adatmezők neveit beletűzdelném. Nagyon döcögős ettől ez a fejezet és ha valaki a mezők nevére kíváncsi, az nem is nagyon tudja kimazsolázni azt a zárójelekből. Ezután vagy beszúrnék egy rövid JSON példát, amiben utána elmondanám, hogy mi mit jelent, vagy valami szép JSON struktúra leírót tennék a végére.}
 
-A recipiens-oldal (recipients) tartalmazza a cPRA mezőt (kalkulált PRA-érték, 0 és 1 között), a bloodtype mezőt, valamint a hasBloodCompatibleDonor jelzőt, amely azt mutatja, van-e vércsoportilag kompatibilis donora az adott recipiensnek.
+Minden JSON-fájl két fő részből áll. A donor-oldal (data) tartalmazza a dage mezőt (donor kora), a bloodtype mezőt (vércsoport: A, B, O vagy AB), az altruistic jelzőt (altruista donor-e), a sources mezőt (a hozzákapcsolt recipiens azonosítója, altruistáknál hiányzik), valamint a matches tömböt, amely az éleket írja le: minden él egy recipiens azonosítóból és egy score értékből áll. Ez utóbbi egy 0--100 közötti, előre aggregált kompatibilitási pontszám, \viki[valószínűleg UKLKSS-alapú HLA-mismatch érték]{Az olvasó ezt nem fogja érteni, el kellene magyarázni mit jelent.}.
+
+A recipiens-oldal (recipients) tartalmazza a cPRA mezőt (\viki[kalkulált PRA-érték, 0 és 1 között]{Én ettől még nem lennék okosabb, hogy ez mit jelent. Ezek a kifejezések (UKLKSS, HLA-mismatch, cPRA, PRA) egyébként mehetnének a Szakkifejezések fejezetbe.}), a bloodtype mezőt, valamint a hasBloodCompatibleDonor jelzőt, amely azt mutatja, van-e vércsoportilag kompatibilis donora az adott recipiensnek.
 
 A jelenlegi solver kizárólag a gráfstruktúrát és az élsúlyokat (score) használja. A cPRA, dage, bloodtype és hasBloodCompatibleDonor mezők a jelenlegi modellben figyelmen kívül maradnak.
 
